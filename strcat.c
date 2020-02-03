@@ -1,31 +1,28 @@
 #include <string.h>
 #include <stdio.h>
 
-char *strcat_first ( char *destination, const char *source ) {
+char *strcat_first(char *destination, const char *source) {
     char *res = destination;
-    while (*destination != '\0') {
+    while (*destination) {
         destination++;
     }
-    while (*source != '\0') {
-        *destination = *source; 
-        destination++;
-        source++;
-    }
+    while ((*destination++ = *source++) != '\0')
+		;
     return res;
 }
 
-char *strcat_second ( char *destination, const char *source ) {
+char *strcat_second(char *destination, const char *source) {
     char *res = destination;
     memcpy(destination + strlen(destination), source, strlen(source)+1);
     return res;
 }
 
 int main() {
-    char des[] = "foo"; 
-    char sor[] = "bar"; 
-    char *first = strcat_first(des, sor);
-    // char *second = strcat_second(des, sor);
-    printf("%s\n", first);
-    // printf("%s\n", second);
+    char str[80];
+    strcpy(str,"these ");
+    strcat_first(str,"strings ");
+    strcat_first(str,"are ");
+    strcat_first(str,"concatenated.");
+    puts(str);
     return 0;
 }
